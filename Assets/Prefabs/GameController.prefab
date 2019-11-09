@@ -348,8 +348,12 @@ MonoBehaviour:
   livesLabel: {fileID: 0}
   scoreLabel: {fileID: 0}
   highScoreLabel: {fileID: 0}
-  scoreBoard: {fileID: 0}
   startLabel: {fileID: 0}
   startButton: {fileID: 0}
   endLabel: {fileID: 0}
   restartButton: {fileID: 0}
+  scoreBoard: {fileID: 11400000, guid: 7eeeb78ec148d7f41b5e1dfeee2e54e7, type: 2}
+  sceneSettings:
+  - {fileID: 11400000, guid: 47c117b5e97872449a8b85ff6062efef, type: 2}
+  - {fileID: 11400000, guid: 0b004ed871845184e822939fef05f3b4, type: 2}
+  - {fileID: 11400000, guid: 9c773e9c69684f74890866f108ec5b5d, type: 2}
