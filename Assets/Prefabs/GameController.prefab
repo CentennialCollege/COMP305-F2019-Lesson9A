@@ -338,6 +338,8 @@ MonoBehaviour:
   island: {fileID: 4066947924111177519, guid: b5c574aad07e45b4ca27759fb28d487b, type: 3}
   numberOfClouds: 3
   clouds: []
+  explosion: {fileID: 3038264918983199035, guid: 40c552c21700f3d47b608b363e67e631,
+    type: 3}
   activeSoundClip: 0
   audioSources:
   - {fileID: 6258031004218500819}

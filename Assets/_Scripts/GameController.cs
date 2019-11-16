@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 using System.IO;
 using System.Linq;
 
-
+[System.Serializable]
 public class GameController : MonoBehaviour
 {
     [Header("Scene Game Objects")]
@@ -15,6 +15,8 @@ public class GameController : MonoBehaviour
     public GameObject island;
     public int numberOfClouds;
     public List<GameObject> clouds;
+    public GameObject explosion;
+
 
     [Header("Audio Sources")]
     public SoundClip activeSoundClip;
@@ -58,6 +60,7 @@ public class GameController : MonoBehaviour
         set
         {
             _lives = value;
+            scoreBoard.lives = _lives;
             if(_lives < 1)
             {
                 
@@ -65,7 +68,7 @@ public class GameController : MonoBehaviour
             }
             else
             {
-                livesLabel.text = "Lives: " + _lives.ToString();
+                livesLabel.text = "Lives: " + scoreBoard.lives;
             }
            
         }
@@ -81,13 +84,13 @@ public class GameController : MonoBehaviour
         set
         {
             _score = value;
-
+            scoreBoard.score = _score;
 
             if (scoreBoard.highScore < _score)
             {
                 scoreBoard.highScore = _score;
             }
-            scoreLabel.text = "Score: " + _score.ToString();
+            scoreLabel.text = "Score: " + scoreBoard.score;
         }
     }
 
@@ -104,11 +107,6 @@ public class GameController : MonoBehaviour
         endLabel = GameObject.Find("EndLabel");
         startButton = GameObject.Find("StartButton");
         restartButton = GameObject.Find("RestartButton");
-
-        // this finds the scriptable object in the Assets folder
-        //scoreBoard = Resources.FindObjectsOfTypeAll<ScoreBoard>()[0] as ScoreBoard;
-
-        //sceneSettings = Resources.FindObjectsOfTypeAll<SceneSettings>().ToList();
     }
 
 
@@ -121,6 +119,12 @@ public class GameController : MonoBehaviour
                 activeSceneSettings = query.ToList()[0];
 
         {
+            if (activeSceneSettings.scene == Scene.MAIN)
+            {
+                Lives = 5;
+                Score = 0;
+            }
+
             activeSoundClip = activeSceneSettings.activeSoundClip;
             scoreLabel.enabled = activeSceneSettings.scoreLabelEnabled;
             livesLabel.enabled = activeSceneSettings.livesLabelEnabled;
@@ -129,12 +133,10 @@ public class GameController : MonoBehaviour
             endLabel.SetActive(activeSceneSettings.endLabelActive);
             startButton.SetActive(activeSceneSettings.startButtonActive);
             restartButton.SetActive(activeSceneSettings.restartButtonActive);
+            livesLabel.text = "Lives: " + scoreBoard.lives;
+            scoreLabel.text = "Score: " + scoreBoard.score;
             highScoreLabel.text = "High Score: " + scoreBoard.highScore;
         }
-
-
-        Lives = 5;
-        Score = 0;
 
 
         if ((activeSoundClip != SoundClip.NONE) && (activeSoundClip != SoundClip.NUM_OF_CLIPS))
@@ -157,12 +159,6 @@ public class GameController : MonoBehaviour
         }
 
         Instantiate(island);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     // Event Handlers

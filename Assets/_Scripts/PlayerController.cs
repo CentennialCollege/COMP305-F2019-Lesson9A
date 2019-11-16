@@ -67,6 +67,8 @@ public class PlayerController : MonoBehaviour
             case "Cloud":
                 _thunderSound.Play();
                 gameController.Lives -= 1;
+                Instantiate(gameController.explosion, this.transform.position, Quaternion.identity);
+                
                 break;
             case "Island":
                 _yaySound.Play();
