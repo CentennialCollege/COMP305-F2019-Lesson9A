@@ -67,7 +67,8 @@ public class PlayerController : MonoBehaviour
             case "Cloud":
                 _thunderSound.Play();
                 gameController.Lives -= 1;
-                Instantiate(gameController.explosion, this.transform.position, Quaternion.identity);
+                var newExplosion = ExplosionManager.GetInstance().GetExplosion();
+                newExplosion.transform.position = transform.position;
                 
                 break;
             case "Island":
