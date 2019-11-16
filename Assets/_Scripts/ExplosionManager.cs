@@ -8,10 +8,7 @@ using UnityEngine;
 
 public class ExplosionManager : MonoBehaviour
 {
-    private GameObject explosion;
     public GameObject explosionContainer;
-
-    private GameController gameController;
 
     public int explosionNumber = 10;
     private static Queue<GameObject> explosions;
@@ -39,8 +36,6 @@ public class ExplosionManager : MonoBehaviour
     void Start()
     {
         // make references to objects
-        gameController = gameObject.GetComponent<GameController>();
-        explosion = gameController.explosion;
         explosions = new Queue<GameObject>(); // instantiates an empty queue container
 
         BuildExplosionPool();
@@ -50,8 +45,9 @@ public class ExplosionManager : MonoBehaviour
     {
         for (int i = 0; i < explosionNumber; i++)
         {
-            var newExplosion = Instantiate(explosion);
-            newExplosion.SetActive(false);
+            //var newExplosion = Instantiate(ExplosionFactory.GetInstance().CreateRandomExplosion());
+            var newExplosion = ExplosionFactory.GetInstance().CreateRandomExplosion();
+            //newExplosion.SetActive(false);
             // set the new explosion to appear inside the explosion Container GO
             newExplosion.transform.parent = explosionContainer.transform;
             explosions.Enqueue(newExplosion);
